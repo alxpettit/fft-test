@@ -1,6 +1,13 @@
 use rustfft::num_complex::Complex;
 use rustfft::FftPlanner;
 
+fn normalize_buf(buf: &mut Vec<Complex<f32>>) {
+    let buf_len = buf.len();
+    for x in &mut buf.iter_mut() {
+        *x = *x / (buf_len as f32);
+    }
+}
+
 fn main() {
     // create a test input vector
     let input_buf = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0];
@@ -25,11 +32,8 @@ fn main() {
     ifft.process(&mut buf);
     println!("Post-IDFT: {:?}\n", buf);
 
-    let buf_len = buf.len();
     // Normalize the output
-    for x in &mut buf {
-        *x = *x / (buf_len as f32);
-    }
+    normalize_buf(&mut buf);
 
     // extract the real parts of the output
     let output_real: Vec<f32> = buf.iter().map(|x| x.re).collect();
