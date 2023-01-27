@@ -1,6 +1,5 @@
 use rustfft::num_complex::Complex;
-use rustfft::num_traits::Zero;
-use rustfft::{FftDirection, FftPlanner};
+use rustfft::FftPlanner;
 
 fn main() {
     // create a test input vector
