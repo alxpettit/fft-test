@@ -11,6 +11,9 @@ fn normalize_buf(buf: &mut Vec<Complex<f32>>) {
 fn main() {
     // create a test input vector
     let input_buf = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0];
+    // vec![
+    //     1.5, 0.0, 1.0, 0.5, 1.0, 0.0, 1.5, 0.0, 1.0, 0.5, 1.0, 0.0, 1.5, 0.0, 1.0, 0.5,
+    // ];
     println!("Input buffer: {:?}\n", input_buf);
     // create a planner for the FFT
     let mut planner = FftPlanner::new();
@@ -25,7 +28,6 @@ fn main() {
     println!("Post-FFT: {:?}\n", buf);
 
     // create a planner for the IDFT
-    let mut planner = FftPlanner::new();
     let ifft = planner.plan_fft_inverse(buf.len());
 
     // perform the IDFT
